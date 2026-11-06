@@ -45,6 +45,7 @@ Los roles de Gabriel y Carlos se alternarán en cada ciclo. La incorporación de
 │   ├── data-model.md
 │   ├── api.md
 │   ├── acceptance-criteria.md
+│   ├── user-stories.md
 │   ├── traceability.md
 │   └── implementation-plan.md
 ├── docs/
