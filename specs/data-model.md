@@ -52,3 +52,12 @@ Se utilizará el modelo de usuario de Django. Los datos adicionales deben manten
 - Las comprobaciones de conflicto se realizan dentro de una transacción.
 - Los registros de auditoría no deben guardar contraseñas ni datos sensibles innecesarios.
 
+## Índices previstos
+
+- `Booking(court_id, starts_at, ends_at, status)` para localizar conflictos.
+- `Booking(user_id, starts_at)` para el historial del cliente.
+- `CourtBlock(court_id, starts_at, ends_at)` para validar bloqueos.
+- `AuditEvent(entity_type, entity_id, created_at)` para reconstruir cambios.
+
+Todas las fechas y horas se almacenarán con zona horaria y se presentarán en la zona configurada para la operación.
+
