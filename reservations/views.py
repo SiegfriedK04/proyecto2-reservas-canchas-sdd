@@ -16,7 +16,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from .forms import RegistrationForm
 from .models import Booking, Court
-from .services import available_slots, cancel_booking, create_booking, nearest_alternatives
+from .services import available_slots, can_cancel_booking, cancel_booking, create_booking, nearest_alternatives
 
 
 class CourtLoginView(LoginView):
@@ -130,7 +130,9 @@ def create_booking_api(request):
 
 @login_required
 def my_bookings(request):
-    bookings = request.user.court_bookings.select_related("court").all()
+    bookings = list(request.user.court_bookings.select_related("court").all())
+    for booking in bookings:
+        booking.can_cancel = can_cancel_booking(booking=booking, actor=request.user)
     return render(request, "reservations/my_bookings.html", {"bookings": bookings})
 
 

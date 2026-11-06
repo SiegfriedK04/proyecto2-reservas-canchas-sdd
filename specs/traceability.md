@@ -11,5 +11,6 @@
 | Respetar bloqueos administrativos | HU-07 | RF-07 | CA-05 | #18 |
 | Explicar rechazo y ofrecer alternativas | HU-08 | RF-08, RF-09 | CA-09 | #19 |
 | Conservar historial operativo | HU-09 | RF-10 | CA-10 | #20 |
+| Aplicar anticipación de cancelación | HU-06 | RF-11, RN-11 | CA-11 | #9 |
 
 La matriz se actualizará en cada cambio de especificación. Un requisito no se considera cerrado mientras no tenga criterio, prueba y evidencia de ejecución.

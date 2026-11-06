@@ -16,5 +16,16 @@
 
 ## Cambio inesperado
 
-Esta sección se completará cuando el equipo reciba o introduzca el cambio de requisito durante el desarrollo. Debe conservar la secuencia completa desde la solicitud hasta las pruebas finales.
+### 2026-11-05 - Ventana mínima de cancelación
+
+- **Cambio solicitado:** impedir cancelaciones de clientes durante las dos horas previas a la reserva.
+- **Motivo:** dar tiempo al administrador para reasignar el horario y preparar la cancha.
+- **Especificación actualizada:** RF-11, RN-11 y HU-06.
+- **Criterio actualizado:** CA-11 contempla rechazo sin mutación y excepción administrativa.
+- **Plan:** especificación y prueba fallida primero; servicio e interfaz después.
+- **Issue:** #9.
+- **Código:** el servicio aplica el límite de manera transaccional y conserva una excepción para personal autorizado.
+- **Interfaz:** la agenda oculta la acción no elegible y explica que faltan menos de dos horas.
+- **Pruebas:** rechazo del cliente, conservación del estado, excepción administrativa y presentación en la agenda.
+- **Estado:** implementado y validado.
 

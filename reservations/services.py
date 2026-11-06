@@ -7,6 +7,9 @@ from django.utils import timezone
 from .models import AuditEvent, Booking, Court, CourtBlock
 
 
+CANCELLATION_NOTICE = timedelta(hours=2)
+
+
 def _intersects(queryset, starts_at, ends_at):
     return queryset.filter(starts_at__lt=ends_at, ends_at__gt=starts_at).exists()
 
@@ -34,6 +37,8 @@ def cancel_booking(*, booking, actor):
         raise PermissionDenied("No puede cancelar una reserva ajena.")
     if locked.status != Booking.Status.CONFIRMED:
         raise ValidationError("La reserva ya no está activa.")
+    if not actor.is_staff and locked.starts_at < timezone.now() + CANCELLATION_NOTICE:
+        raise ValidationError("La cancelación requiere al menos dos horas de anticipación.")
 
     locked.status = Booking.Status.CANCELLED
     locked.cancelled_at = timezone.now()
@@ -46,6 +51,12 @@ def cancel_booking(*, booking, actor):
         details={"court_id": locked.court_id},
     )
     return locked
+
+
+def can_cancel_booking(*, booking, actor):
+    if booking.status != Booking.Status.CONFIRMED:
+        return False
+    return actor.is_staff or booking.starts_at >= timezone.now() + CANCELLATION_NOTICE
 
 
 def available_slots(*, court, day):
