@@ -24,5 +24,8 @@
 - **Criterio actualizado:** CA-11 contempla rechazo sin mutación y excepción administrativa.
 - **Plan:** especificación y prueba fallida primero; servicio e interfaz después.
 - **Issue:** #9.
-- **Estado:** implementación en curso.
+- **Código:** el servicio aplica el límite de manera transaccional y conserva una excepción para personal autorizado.
+- **Interfaz:** la agenda oculta la acción no elegible y explica que faltan menos de dos horas.
+- **Pruebas:** rechazo del cliente, conservación del estado, excepción administrativa y presentación en la agenda.
+- **Estado:** implementado y validado.
 

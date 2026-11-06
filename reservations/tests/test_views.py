@@ -161,3 +161,18 @@ class ReservationViewTests(TestCase):
 
         self.assertEqual(response.status_code, 405)
 
+    def test_my_bookings_explains_when_cancellation_window_is_closed(self):
+        starts_at = timezone.now() + timedelta(hours=1)
+        booking = Booking.objects.create(
+            user=self.user,
+            court=self.court,
+            starts_at=starts_at,
+            ends_at=starts_at + timedelta(hours=1),
+        )
+        self.client.force_login(self.user)
+
+        response = self.client.get(reverse("reservations:my_bookings"))
+
+        self.assertContains(response, "Faltan menos de dos horas")
+        self.assertNotContains(response, reverse("reservations:cancel_booking", args=[booking.pk]))
+

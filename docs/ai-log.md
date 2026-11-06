@@ -7,6 +7,7 @@
 | 2026-11-05 | Arquitectura y reserva mínima | Codex | Implementar el dominio y las reglas críticas definidas en las especificaciones | Modelos, servicios transaccionales, migración y pruebas de conflictos | Integrar después de revisión cruzada |
 | 2026-11-05 | Experiencia de reserva | Codex | Crear catálogo, registro y calendario visual con selección de horarios | Interfaz adaptable, API de disponibilidad, confirmación y cancelaciones | Conservar la paleta iOS y el calendario mensual como recorrido principal |
 | 2026-11-05 | Revisión visual y calidad | Codex | Verificar formularios, calendario, ejecución local y datos de demostración | Pantallas revisadas, textos corregidos y suite ampliada | Automatizar las verificaciones en cada Pull Request |
+| 2026-11-05 | Cambio de especificación | Codex | Incorporar una ventana mínima de dos horas para cancelaciones | Especificaciones, prueba inicialmente fallida, servicio, interfaz y pruebas finales | Aprobar el cambio con excepción operativa para administradores |
 
 ## Regla de uso
 
