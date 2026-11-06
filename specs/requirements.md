@@ -12,6 +12,7 @@
 - **RF-08:** Ante un rechazo, el sistema debe informar la causa y conservar el estado previo.
 - **RF-09:** El sistema debe mostrar alternativas próximas cuando el horario solicitado no esté disponible.
 - **RF-10:** Las cancelaciones y cambios administrativos deben quedar registrados.
+- **RF-11:** El cliente debe cancelar con un mínimo de dos horas de anticipación; el personal autorizado puede intervenir por razones operativas.
 
 ## Requisitos no funcionales
 

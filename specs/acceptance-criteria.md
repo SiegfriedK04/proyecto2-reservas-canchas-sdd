@@ -10,6 +10,7 @@
 - **CA-08:** Dada una reserva ajena, cuando un usuario intenta cancelarla, entonces recibe una respuesta de acceso denegado y el estado no cambia.
 - **CA-09:** Dado un conflicto, cuando se rechaza la solicitud, entonces el usuario recibe la causa y al menos una alternativa cuando existan horarios cercanos.
 - **CA-10:** Dada una acción de creación, cancelación o bloqueo, cuando concluye, entonces queda registrada para auditoría.
+- **CA-11:** Dada una reserva que inicia en menos de dos horas, cuando el cliente intenta cancelarla, entonces el sistema conserva la reserva y explica el límite; un administrador sí puede cancelarla por operación.
 
 ## Criterio obligatorio de doble reserva
 

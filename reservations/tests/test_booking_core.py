@@ -127,6 +127,21 @@ class BookingCoreTests(TestCase):
 
         self.assertEqual(result.status, Booking.Status.CANCELLED)
 
+    def test_customer_cannot_cancel_with_less_than_two_hours_notice(self):
+        starts_at = timezone.now() + timedelta(hours=1)
+        booking = Booking.objects.create(
+            user=self.user,
+            court=self.court,
+            starts_at=starts_at,
+            ends_at=starts_at + timedelta(hours=1),
+        )
+
+        with self.assertRaisesMessage(ValidationError, "dos horas"):
+            cancel_booking(booking=booking, actor=self.user)
+
+        booking.refresh_from_db()
+        self.assertEqual(booking.status, Booking.Status.CONFIRMED)
+
     def test_available_slots_exclude_booking_and_block(self):
         day = self.start.date()
         create_booking(user=self.user, court=self.court, starts_at=self.start, ends_at=self.end)

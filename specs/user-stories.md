@@ -73,8 +73,9 @@ Las historias se numeran para mantener trazabilidad entre backlog, requisitos, c
 - Solo se muestran datos privados del usuario autenticado.
 - El cliente no puede cancelar una reserva ajena.
 - Una cancelación libera disponibilidad y conserva historial.
+- El cliente debe cancelar con al menos dos horas de anticipación; el administrador conserva capacidad de intervención.
 
-**Trazabilidad:** RF-06, CA-07, CA-08.
+**Trazabilidad:** RF-06, RF-11, CA-07, CA-08, CA-11.
 
 ## HU-07 - Administrar canchas y bloqueos
 

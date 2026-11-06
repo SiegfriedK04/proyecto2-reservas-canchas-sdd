@@ -10,6 +10,7 @@
 - **RN-08:** Una reserva cancelada deja de bloquear disponibilidad, pero permanece en el historial.
 - **RN-09:** Un rechazo no debe crear ni modificar reservas.
 - **RN-10:** Los mensajes de disponibilidad no deben revelar la identidad de otros usuarios.
+- **RN-11:** Un cliente solo puede cancelar hasta dos horas antes del inicio. El personal administrativo puede cancelar dentro de ese período para resolver incidencias operativas.
 
 ## Regla crítica de solapamiento
 
