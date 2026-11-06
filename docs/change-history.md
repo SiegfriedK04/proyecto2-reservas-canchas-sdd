@@ -12,6 +12,7 @@
 - Se implementaron el dominio de reservas, el catálogo, el registro y la gestión de sesiones.
 - Se añadió un calendario mensual interactivo, horarios disponibles, resumen y confirmación.
 - Se incorporaron cancelaciones, alternativas ante conflictos, datos demo y 24 pruebas automatizadas.
+- Se añadió integración continua y se amplió la suite a 27 pruebas con cobertura del panel administrativo y datos demo.
 
 ## Cambio inesperado
 
