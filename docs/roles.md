@@ -4,7 +4,8 @@
 |---|---|---|---|
 | Fundación y especificaciones | Gabriel Rodríguez | Carlos Jaén | Compartido temporalmente |
 | Reserva mínima | Carlos Jaén | Gabriel Rodríguez | Compartido temporalmente |
-| Operación y calidad | Por confirmar | Por confirmar | David Ortega, sujeto a incorporación |
+| Operación y calidad | Carlos Jaén | Gabriel Rodríguez | Revisión cruzada entre Gabriel y Carlos |
+| Mejoras complementarias | Gabriel Rodríguez | Carlos Jaén | David Ortega |
 
 ## Responsabilidades
 
@@ -26,5 +27,5 @@
 - Mantener integración continua.
 - Verificar instalación, ejecución y evidencia.
 
-La ausencia temporal de un integrante no elimina el rol: sus controles se comparten hasta la siguiente rotación.
+La revisión cruzada se mantiene en todos los ciclos. El ciclo de mejoras complementarias reserva tareas abiertas para que David incorpore aportes adicionales sin alterar la línea base aprobada.
 

@@ -34,7 +34,10 @@ Cada Pull Request debe incluir los comandos ejecutados y relacionar las pruebas 
 ## Resultado del ciclo de interfaz y reservas
 
 - `python manage.py check`: sin observaciones.
-- `python manage.py test`: 24 pruebas aprobadas.
+- `python manage.py test`: 27 pruebas aprobadas.
 - Revisión visual: inicio, calendario, inicio de sesión y registro verificados en escritorio.
 - Calendario: 42 celdas mensuales, navegación entre meses y horarios obtenidos desde la API.
+- Datos demo: ejecución repetible y permisos del administrador verificados.
+- Administración: canchas, reservas, bloqueos y auditoría registrados en el panel.
+- Integración continua: configuración preparada para ejecutar comprobaciones y pruebas en cada Pull Request.
 
