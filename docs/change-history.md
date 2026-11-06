@@ -7,6 +7,7 @@
 - Se definieron resultado, métricas, alcance y reglas preliminares.
 - Se propuso el stack y la rotación inicial de roles.
 - Se preparó el backlog de fundación, especificaciones, arquitectura, implementación y pruebas.
+- Se revisó la arquitectura inicial, se documentó el flujo transaccional y se añadió la matriz de trazabilidad.
 
 ## Cambio inesperado
 

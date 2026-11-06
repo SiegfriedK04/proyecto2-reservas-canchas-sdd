@@ -23,6 +23,21 @@ Se propone una aplicación web monolítica con Django porque el equipo ya conoce
 - `bookings`: disponibilidad, creación, consulta y cancelación.
 - `audit`: eventos relevantes de reservas y administración.
 
+## Flujo de creación de una reserva
+
+1. La vista valida autenticación y formato de los datos.
+2. Un servicio de dominio abre una transacción.
+3. El servicio obtiene la cancha y comprueba horario operativo.
+4. Se consultan reservas confirmadas y bloqueos que intersecten el intervalo.
+5. Si existe conflicto, se devuelve un rechazo estable sin modificar datos.
+6. Si no existe conflicto, se crea la reserva y su evento de auditoría.
+
+La comprobación y la escritura deben pertenecer a la misma operación. La interfaz no puede decidir por sí sola que un horario continúa disponible.
+
+## Concurrencia
+
+SQLite es suficiente para la demostración local, pero no representa el comportamiento final bajo múltiples solicitudes simultáneas. Para un entorno compartido se utilizará PostgreSQL y se revisará una estrategia de bloqueo o restricción que evite que dos transacciones confirmen el mismo intervalo. Las pruebas del proyecto cubrirán el resultado observable aunque el mecanismo cambie por motor de base de datos.
+
 ## Límites
 
 - Las reglas críticas pertenecen al servidor y no dependen del JavaScript del navegador.
