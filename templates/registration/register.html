@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Crear cuenta | CourtFlow{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-copy">
+        <span class="eyebrow">Tu tiempo, bajo control</span>
+        <h1>Crea una cuenta y reserva en minutos.</h1>
+        <p>Tus próximas reservas y cancelaciones estarán reunidas en un solo lugar.</p>
+    </div>
+    <div class="form-card form-card-wide glass-panel">
+        <div class="form-card-heading">
+            <div class="form-icon"><i data-lucide="user-plus"></i></div>
+            <div><h2>Crear cuenta</h2><p>Completa tus datos para comenzar.</p></div>
+        </div>
+        <form method="post" class="form-grid">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="field-group {% if field.name == 'password1' or field.name == 'password2' %}field-full{% endif %}">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}<small class="field-help">{{ field.help_text|striptags }}</small>{% endif %}
+                    {% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+            {% endfor %}
+            <button class="button button-full field-full" type="submit">Crear mi cuenta</button>
+        </form>
+        <p class="form-foot">¿Ya tienes cuenta? <a href="{% url 'reservations:login' %}">Inicia sesión</a></p>
+    </div>
+</section>
+{% endblock %}
+

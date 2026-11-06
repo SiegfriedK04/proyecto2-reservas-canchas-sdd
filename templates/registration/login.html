@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión | CourtFlow{% endblock %}
+{% block content %}
+<section class="auth-layout">
+    <div class="auth-copy">
+        <span class="eyebrow">Bienvenido de nuevo</span>
+        <h1>Continúa gestionando tus horarios.</h1>
+        <p>Accede a tus reservas, consulta cambios y encuentra nuevas opciones.</p>
+    </div>
+    <div class="form-card glass-panel">
+        <div class="form-card-heading">
+            <div class="form-icon"><i data-lucide="log-in"></i></div>
+            <div><h2>Iniciar sesión</h2><p>Ingresa tus credenciales.</p></div>
+        </div>
+        <form method="post" class="form-stack">
+            {% csrf_token %}
+            {% if form.non_field_errors %}<div class="form-alert">{{ form.non_field_errors }}</div>{% endif %}
+            {% for field in form %}
+                <div class="field-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+            {% endfor %}
+            {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+            <button class="button button-full" type="submit">Ingresar</button>
+        </form>
+        <p class="form-foot">¿Aún no tienes cuenta? <a href="{% url 'reservations:register' %}">Regístrate</a></p>
+    </div>
+</section>
+{% endblock %}
+

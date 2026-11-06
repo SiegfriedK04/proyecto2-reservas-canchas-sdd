@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Mis reservas | CourtFlow{% endblock %}
+{% block content %}
+<section class="page-heading">
+    <div><span class="eyebrow">Tu agenda</span><h1>Mis reservas</h1></div>
+    <a class="button" href="{% url 'reservations:home' %}"><i data-lucide="plus"></i> Nueva reserva</a>
+</section>
+
+<section class="booking-list">
+    {% for booking in bookings %}
+        <article class="booking-card glass-panel {% if booking.status == 'cancelled' %}booking-cancelled{% endif %}">
+            <div class="booking-date-block">
+                <span>{{ booking.starts_at|date:"M" }}</span>
+                <strong>{{ booking.starts_at|date:"d" }}</strong>
+            </div>
+            <div class="booking-info">
+                <div class="booking-title-row">
+                    <h2>{{ booking.court.name }}</h2>
+                    <span class="status-pill status-{{ booking.status }}">{{ booking.get_status_display }}</span>
+                </div>
+                <p><i data-lucide="clock-3"></i> {{ booking.starts_at|date:"l, j \d\e F" }} · {{ booking.starts_at|time:"g:i a" }} - {{ booking.ends_at|time:"g:i a" }}</p>
+                <p><i data-lucide="map-pin"></i> {{ booking.court.location }}</p>
+            </div>
+            {% if booking.status == 'confirmed' %}
+                <form method="post" action="{% url 'reservations:cancel_booking' booking.id %}">
+                    {% csrf_token %}
+                    <button class="button button-danger button-small" type="submit">Cancelar</button>
+                </form>
+            {% endif %}
+        </article>
+    {% empty %}
+        <div class="empty-state glass-panel">
+            <i data-lucide="calendar-check-2"></i>
+            <h2>Aún no tienes reservas</h2>
+            <p>Elige una cancha y encuentra el horario que mejor te funcione.</p>
+            <a class="button" href="{% url 'reservations:home' %}">Explorar canchas</a>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
+
