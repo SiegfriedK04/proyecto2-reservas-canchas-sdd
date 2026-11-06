@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Canchas | CourtFlow{% endblock %}
+{% block content %}
+<section class="hero glass-panel">
+    <div class="hero-copy">
+        <span class="eyebrow">Reserva sin mensajes ni esperas</span>
+        <h1>Tu cancha, en el horario que necesitas.</h1>
+        <p>Consulta disponibilidad real, elige un día en el calendario y confirma tu espacio en pocos pasos.</p>
+        <div class="hero-actions">
+            {% if courts %}<a class="button" href="{% url 'reservations:booking_calendar' courts.0.id %}">Ver disponibilidad</a>{% endif %}
+            {% if not user.is_authenticated %}<a class="button button-secondary" href="{% url 'reservations:register' %}">Crear cuenta</a>{% endif %}
+        </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+        <div class="mini-card mini-card-main">
+            <span>Próximo horario</span>
+            <strong>6:30 p. m.</strong>
+            <small>Cancha Pacífico</small>
+        </div>
+        <div class="mini-card mini-card-top"><i data-lucide="check"></i> Disponible</div>
+        <div class="mini-card mini-card-bottom"><i data-lucide="clock-3"></i> Confirmación inmediata</div>
+    </div>
+</section>
+
+<section class="section-heading">
+    <div>
+        <span class="eyebrow">Espacios disponibles</span>
+        <h2>Elige dónde quieres jugar</h2>
+    </div>
+    <p>Horarios y bloqueos se validan antes de confirmar.</p>
+</section>
+
+<section class="court-grid">
+    {% for court in courts %}
+        <article class="court-card glass-panel">
+            <div class="court-icon"><i data-lucide="circle-dot"></i></div>
+            <div class="court-card-content">
+                <span class="status-pill"><span></span> Activa</span>
+                <h3>{{ court.name }}</h3>
+                <p>{{ court.description|default:"Espacio preparado para una experiencia cómoda y organizada." }}</p>
+                <dl class="court-meta">
+                    <div><dt><i data-lucide="map-pin"></i></dt><dd>{{ court.location|default:"Sede principal" }}</dd></div>
+                    <div><dt><i data-lucide="clock-3"></i></dt><dd>{{ court.opening_time|time:"g:i a" }} - {{ court.closing_time|time:"g:i a" }}</dd></div>
+                </dl>
+                <a class="button button-full" href="{% url 'reservations:booking_calendar' court.id %}">Seleccionar horario <i data-lucide="arrow-right"></i></a>
+            </div>
+        </article>
+    {% empty %}
+        <div class="empty-state glass-panel">
+            <i data-lucide="calendar-x"></i>
+            <h3>Aún no hay canchas publicadas</h3>
+            <p>El administrador puede agregarlas desde el panel de gestión.</p>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}
+

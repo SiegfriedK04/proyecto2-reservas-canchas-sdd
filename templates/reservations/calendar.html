@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Reservar {{ court.name }} | CourtFlow{% endblock %}
+{% block content %}
+<section class="booking-heading">
+    <a class="back-link" href="{% url 'reservations:home' %}"><i data-lucide="arrow-left"></i> Volver a canchas</a>
+    <span class="eyebrow">Selecciona fecha y hora</span>
+    <h1>Reserva {{ court.name }}</h1>
+    <p>{{ court.location }} · Sesiones de {{ court.slot_minutes }} minutos</p>
+</section>
+
+<section
+    id="booking-app"
+    class="booking-layout glass-panel"
+    data-court-id="{{ court.id }}"
+    data-court-name="{{ court.name }}"
+    data-duration="{{ court.slot_minutes }}"
+    data-initial-date="{{ initial_date }}"
+    data-availability-url="{% url 'reservations:availability_api' court.id %}"
+    data-booking-url="{% url 'reservations:create_booking_api' %}"
+    data-login-url="{% url 'reservations:login' %}?next={{ request.path|urlencode }}"
+    data-my-bookings-url="{% url 'reservations:my_bookings' %}"
+    data-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+>
+    <div class="booking-column calendar-column">
+        <div class="column-heading">
+            <div><span>Paso 1</span><h2>Selecciona un día</h2></div>
+            <span class="timezone"><i data-lucide="globe-2"></i> Hora de Panamá</span>
+        </div>
+        <div class="month-toolbar">
+            <button id="previous-month" class="icon-button" type="button" aria-label="Mes anterior"><i data-lucide="chevron-left"></i></button>
+            <strong id="month-label"></strong>
+            <button id="next-month" class="icon-button" type="button" aria-label="Mes siguiente"><i data-lucide="chevron-right"></i></button>
+        </div>
+        <div class="weekday-row" aria-hidden="true">
+            <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Calendario mensual"></div>
+        <div class="calendar-legend"><span><i></i> Días disponibles</span><span><i></i> Día seleccionado</span></div>
+    </div>
+
+    <div class="booking-column slots-column">
+        <div class="column-heading">
+            <div><span>Paso 2</span><h2 id="selected-date-label">Elige un horario</h2></div>
+        </div>
+        <div id="slot-state" class="slot-state">Selecciona un día para consultar horarios.</div>
+        <div id="slot-grid" class="slot-grid" aria-live="polite"></div>
+    </div>
+
+    <aside class="booking-column summary-column">
+        <div class="column-heading">
+            <div><span>Resumen</span><h2>Tu reserva</h2></div>
+        </div>
+        <div class="summary-court">
+            <div class="summary-icon"><i data-lucide="circle-dot"></i></div>
+            <div><strong>{{ court.name }}</strong><span>{{ court.location }}</span></div>
+        </div>
+        <dl class="summary-list">
+            <div><dt><i data-lucide="calendar-days"></i> Fecha</dt><dd id="summary-date">Sin seleccionar</dd></div>
+            <div><dt><i data-lucide="clock-3"></i> Horario</dt><dd id="summary-time">Sin seleccionar</dd></div>
+            <div><dt><i data-lucide="timer"></i> Duración</dt><dd>{{ court.slot_minutes }} minutos</dd></div>
+        </dl>
+        <div id="booking-feedback" class="booking-feedback" aria-live="polite"></div>
+        {% if user.is_authenticated %}
+            <button id="confirm-booking" class="button button-full" type="button" disabled>Confirmar reserva</button>
+        {% else %}
+            <a class="button button-full" href="{% url 'reservations:login' %}?next={{ request.path|urlencode }}">Inicia sesión para reservar</a>
+        {% endif %}
+        <p class="summary-note"><i data-lucide="shield-check"></i> El horario se valida nuevamente antes de confirmar.</p>
+    </aside>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/calendar.js' %}"></script>{% endblock %}
+

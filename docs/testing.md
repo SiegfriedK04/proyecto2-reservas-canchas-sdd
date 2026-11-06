@@ -31,3 +31,10 @@ GitHub Actions ejecutará comprobaciones y pruebas en cada Pull Request y actual
 
 Cada Pull Request debe incluir los comandos ejecutados y relacionar las pruebas con los criterios de aceptación afectados.
 
+## Resultado del ciclo de interfaz y reservas
+
+- `python manage.py check`: sin observaciones.
+- `python manage.py test`: 24 pruebas aprobadas.
+- Revisión visual: inicio, calendario, inicio de sesión y registro verificados en escritorio.
+- Calendario: 42 celdas mensuales, navegación entre meses y horarios obtenidos desde la API.
+

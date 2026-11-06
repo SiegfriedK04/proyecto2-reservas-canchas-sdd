@@ -9,6 +9,9 @@
 - Se preparó el backlog de fundación, especificaciones, arquitectura, implementación y pruebas.
 - Se revisó la arquitectura inicial, se documentó el flujo transaccional y se añadió la matriz de trazabilidad.
 - Se documentaron nueve historias de usuario numeradas y se enlazaron con requisitos y criterios.
+- Se implementaron el dominio de reservas, el catálogo, el registro y la gestión de sesiones.
+- Se añadió un calendario mensual interactivo, horarios disponibles, resumen y confirmación.
+- Se incorporaron cancelaciones, alternativas ante conflictos, datos demo y 24 pruebas automatizadas.
 
 ## Cambio inesperado
 

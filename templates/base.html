@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f5f7">
+    <title>{% block title %}CourtFlow{% endblock %}</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="site-header">
+        <nav class="nav glass-nav" aria-label="Navegación principal">
+            <a class="brand" href="{% url 'reservations:home' %}">
+                <span class="brand-mark"><i data-lucide="calendar-days"></i></span>
+                <span>CourtFlow</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'reservations:home' %}">Canchas</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'reservations:my_bookings' %}">Mis reservas</a>
+                    {% if user.is_staff %}<a href="/admin/">Administración</a>{% endif %}
+                    <form action="{% url 'reservations:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="link-button" type="submit">Cerrar sesión</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'reservations:login' %}">Iniciar sesión</a>
+                    <a class="button button-small" href="{% url 'reservations:register' %}">Crear cuenta</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    {% if messages %}
+        <div class="toast-stack" aria-live="polite">
+            {% for message in messages %}<div class="toast toast-{{ message.tags|default:'info' }}">{{ message }}</div>{% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="page-shell">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <span>CourtFlow</span>
+        <span>Reservas claras, horarios confiables.</span>
+    </footer>
+    <script>window.addEventListener("DOMContentLoaded", () => window.lucide && lucide.createIcons());</script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
