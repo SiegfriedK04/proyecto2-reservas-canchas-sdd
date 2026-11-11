@@ -10,10 +10,6 @@ from .models import AuditEvent, Booking, Court, CourtBlock
 CANCELLATION_NOTICE = timedelta(hours=2)
 
 
-def _intersects(queryset, starts_at, ends_at):
-    return queryset.filter(starts_at__lt=ends_at, ends_at__gt=starts_at).exists()
-
-
 @transaction.atomic
 def create_booking(*, user, court, starts_at, ends_at):
     locked_court = Court.objects.select_for_update().get(pk=court.pk)
@@ -59,27 +55,53 @@ def can_cancel_booking(*, booking, actor):
     return actor.is_staff or booking.starts_at >= timezone.now() + CANCELLATION_NOTICE
 
 
-def available_slots(*, court, day):
+def day_schedule(*, court, day):
+    """Horarios futuros de la jornada, marcados como disponibles u ocupados.
+
+    Reservas confirmadas y bloqueos se consultan una sola vez para toda la
+    jornada. Un horario ocupado no informa usuario ni motivo (RN-10).
+    """
     zone = timezone.get_current_timezone()
-    cursor = timezone.make_aware(datetime.combine(day, court.opening_time), zone)
+    opening = timezone.make_aware(datetime.combine(day, court.opening_time), zone)
     closing = timezone.make_aware(datetime.combine(day, court.closing_time), zone)
     duration = timedelta(minutes=court.slot_minutes)
-    bookings = court.bookings.filter(status=Booking.Status.CONFIRMED)
-    blocks = court.blocks.all()
-    slots = []
+    busy = list(
+        court.bookings.filter(
+            status=Booking.Status.CONFIRMED, starts_at__lt=closing, ends_at__gt=opening
+        ).values_list("starts_at", "ends_at")
+    )
+    busy += list(court.blocks.filter(starts_at__lt=closing, ends_at__gt=opening).values_list("starts_at", "ends_at"))
+    now = timezone.now()
+    schedule = []
 
+    cursor = opening
     while cursor + duration <= closing:
         slot_end = cursor + duration
-        if cursor > timezone.now() and not _intersects(bookings, cursor, slot_end) and not _intersects(blocks, cursor, slot_end):
-            slots.append(
+        if cursor > now:
+            occupied = any(start < slot_end and end > cursor for start, end in busy)
+            schedule.append(
                 {
                     "start": cursor.isoformat(),
                     "end": slot_end.isoformat(),
                     "label": timezone.localtime(cursor).strftime("%I:%M %p").lstrip("0").lower(),
+                    "available": not occupied,
                 }
             )
         cursor = slot_end
-    return slots
+    return schedule
+
+
+def day_availability(*, court, day):
+    """Devuelve (disponibles, ocupados) con una sola lectura de la jornada."""
+    available, occupied = [], []
+    for slot in day_schedule(court=court, day=day):
+        public = {"start": slot["start"], "end": slot["end"], "label": slot["label"]}
+        (available if slot["available"] else occupied).append(public)
+    return available, occupied
+
+
+def available_slots(*, court, day):
+    return day_availability(court=court, day=day)[0]
 
 
 def nearest_alternatives(*, court, starts_at, ends_at, limit=4):

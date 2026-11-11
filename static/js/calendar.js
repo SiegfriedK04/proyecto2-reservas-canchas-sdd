@@ -113,17 +113,33 @@
             const payload = await response.json();
             if (!response.ok) throw new Error(payload.error || "No fue posible consultar los horarios.");
             slotState.className = "slot-state";
-            if (!payload.slots.length) {
+            const occupied = payload.occupied_slots || [];
+            const schedule = [
+                ...payload.slots.map((slot) => ({ ...slot, available: true })),
+                ...occupied.map((slot) => ({ ...slot, available: false })),
+            ].sort((first, second) => new Date(first.start) - new Date(second.start));
+            if (!schedule.length) {
                 slotState.textContent = "No quedan horarios disponibles para este día.";
                 return;
             }
-            slotState.hidden = true;
-            payload.slots.forEach((slot) => {
+            if (payload.slots.length) slotState.hidden = true;
+            else slotState.textContent = "Todos los horarios de este día están ocupados. Prueba con otra fecha.";
+            schedule.forEach((slot) => {
                 const button = document.createElement("button");
                 button.type = "button";
                 button.className = "slot-button";
                 button.textContent = slot.label;
-                button.addEventListener("click", () => selectSlot(slot, button));
+                if (slot.available) {
+                    button.setAttribute("aria-pressed", "false");
+                    button.addEventListener("click", () => selectSlot(slot, button));
+                } else {
+                    button.disabled = true;
+                    button.classList.add("slot-occupied");
+                    button.setAttribute("aria-label", `${slot.label}, ocupado`);
+                    const tag = document.createElement("small");
+                    tag.textContent = "Ocupado";
+                    button.appendChild(tag);
+                }
                 slotGrid.appendChild(button);
             });
         } catch (error) {
@@ -134,8 +150,12 @@
 
     function selectSlot(slot, button) {
         selectedSlot = slot;
-        slotGrid.querySelectorAll(".slot-button").forEach((item) => item.classList.remove("selected"));
+        slotGrid.querySelectorAll(".slot-button:not(.slot-occupied)").forEach((item) => {
+            item.classList.remove("selected");
+            item.setAttribute("aria-pressed", "false");
+        });
         button.classList.add("selected");
+        button.setAttribute("aria-pressed", "true");
         const start = new Date(slot.start);
         const end = new Date(slot.end);
         summaryTime.textContent = `${shortTime.format(start)} - ${shortTime.format(end)}`;
