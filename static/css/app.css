@@ -213,6 +213,12 @@ p { color: var(--muted); line-height: 1.65; }
 .slot-button { min-height: 47px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: rgba(255,255,255,.66); font-weight: 700; }
 .slot-button:hover { border-color: rgba(0,122,255,.5); color: var(--blue); background: white; }
 .slot-button.selected { border-color: var(--blue); color: var(--blue); background: rgba(0,122,255,.09); box-shadow: 0 0 0 3px rgba(0,122,255,.09); }
+.slot-button.slot-occupied { display: grid; place-content: center; gap: 1px; border-style: dashed; color: rgba(60,60,67,.42); background: rgba(118,118,128,.07); text-decoration: line-through; cursor: not-allowed; }
+.slot-button.slot-occupied small { color: var(--muted); font-size: .64rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; text-transform: uppercase; }
+.slot-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; color: var(--muted); font-size: .7rem; }
+.slot-legend span { display: flex; align-items: center; gap: 6px; }
+.slot-legend i { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line); border-radius: 4px; background: rgba(255,255,255,.66); }
+.slot-legend .legend-occupied { border-style: dashed; background: rgba(118,118,128,.12); }
 .slot-state { padding: 24px 12px; color: var(--muted); text-align: center; font-size: .88rem; }
 .slot-state.loading::before { content: ""; display: block; width: 25px; height: 25px; margin: 0 auto 12px; border: 3px solid rgba(0,122,255,.15); border-top-color: var(--blue); border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
