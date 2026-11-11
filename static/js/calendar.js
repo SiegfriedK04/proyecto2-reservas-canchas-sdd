@@ -78,7 +78,10 @@
             if (otherMonth) button.classList.add("other-month");
             if (value < today) button.disabled = true;
             else button.classList.add("available");
-            if (sameDay(value, selectedDate)) button.classList.add("selected");
+            const isSelected = sameDay(value, selectedDate);
+            if (isSelected) button.classList.add("selected");
+            button.setAttribute("aria-selected", String(isSelected));
+            if (sameDay(value, today)) button.setAttribute("aria-current", "date");
             button.addEventListener("click", () => selectDate(value));
             grid.appendChild(button);
         }
