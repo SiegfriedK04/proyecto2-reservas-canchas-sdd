@@ -13,6 +13,9 @@
 - **RF-09:** El sistema debe mostrar alternativas próximas cuando el horario solicitado no esté disponible.
 - **RF-10:** Las cancelaciones y cambios administrativos deben quedar registrados.
 - **RF-11:** El cliente debe cancelar con un mínimo de dos horas de anticipación; el personal autorizado puede intervenir por razones operativas.
+- **RF-12:** La agenda del cliente debe separar las próximas reservas, ordenadas por cercanía, del historial de reservas canceladas o finalizadas.
+- **RF-13:** La portada debe mostrar el próximo horario disponible real entre las canchas activas dentro de los siguientes siete días.
+- **RF-14:** El calendario debe aceptar una fecha inicial mediante el parámetro `fecha` e ignorar valores pasados o inválidos.
 
 ## Requisitos no funcionales
 
@@ -23,6 +26,7 @@
 - **RNF-05:** La interfaz debe poder utilizarse en computadora y dispositivo móvil.
 - **RNF-06:** La ejecución local debe poder iniciarse con instrucciones reproducibles.
 - **RNF-07:** Cada cambio funcional debe relacionarse con un Issue, una rama y una revisión.
+- **RNF-08:** La interfaz debe poder recorrerse con teclado, con foco visible e indicación accesible de la página actual.
 
 ## Dependencias de aprobación
 
