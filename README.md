@@ -53,7 +53,7 @@ La suite cubre reglas de horario, conflictos, bloqueos, permisos, registro, cale
 
 ## Historias de usuario
 
-El backlog funcional está numerado de **HU-01** a **HU-09** en [`specs/user-stories.md`](specs/user-stories.md). Cada historia incluye criterios verificables y su relación con requisitos y pruebas.
+El backlog funcional está numerado de **HU-01** a **HU-12** en [`specs/user-stories.md`](specs/user-stories.md). Cada historia incluye criterios verificables y su relación con requisitos y pruebas.
 
 ## Estructura del proyecto
 
