@@ -130,10 +130,21 @@ def create_booking_api(request):
 
 @login_required
 def my_bookings(request):
-    bookings = list(request.user.court_bookings.select_related("court").all())
-    for booking in bookings:
+    now = timezone.now()
+    upcoming, history = [], []
+    for booking in request.user.court_bookings.select_related("court").order_by("starts_at"):
         booking.can_cancel = can_cancel_booking(booking=booking, actor=request.user)
-    return render(request, "reservations/my_bookings.html", {"bookings": bookings})
+        booking.is_finished = booking.status == Booking.Status.CONFIRMED and booking.ends_at <= now
+        if booking.status == Booking.Status.CONFIRMED and not booking.is_finished:
+            upcoming.append(booking)
+        else:
+            history.append(booking)
+    history.reverse()
+    return render(
+        request,
+        "reservations/my_bookings.html",
+        {"upcoming": upcoming, "history": history, "next_booking": upcoming[0] if upcoming else None},
+    )
 
 
 @require_POST
