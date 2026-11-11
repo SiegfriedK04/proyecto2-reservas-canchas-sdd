@@ -6,38 +6,45 @@
     <a class="button" href="{% url 'reservations:home' %}"><i data-lucide="plus"></i> Nueva reserva</a>
 </section>
 
-<section class="booking-list">
-    {% for booking in bookings %}
-        <article class="booking-card glass-panel {% if booking.status == 'cancelled' %}booking-cancelled{% endif %}">
-            <div class="booking-date-block">
-                <span>{{ booking.starts_at|date:"M" }}</span>
-                <strong>{{ booking.starts_at|date:"d" }}</strong>
-            </div>
-            <div class="booking-info">
-                <div class="booking-title-row">
-                    <h2>{{ booking.court.name }}</h2>
-                    <span class="status-pill status-{{ booking.status }}">{{ booking.get_status_display }}</span>
-                </div>
-                <p><i data-lucide="clock-3"></i> {{ booking.starts_at|date:"l, j \d\e F" }} · {{ booking.starts_at|time:"g:i a" }} - {{ booking.ends_at|time:"g:i a" }}</p>
-                <p><i data-lucide="map-pin"></i> {{ booking.court.location }}</p>
-            </div>
-            {% if booking.can_cancel %}
-                <form method="post" action="{% url 'reservations:cancel_booking' booking.id %}">
-                    {% csrf_token %}
-                    <button class="button button-danger button-small" type="submit">Cancelar</button>
-                </form>
-            {% elif booking.status == 'confirmed' %}
-                <span class="cancel-note"><i data-lucide="lock-keyhole"></i> Faltan menos de dos horas</span>
-            {% endif %}
-        </article>
-    {% empty %}
-        <div class="empty-state glass-panel">
-            <i data-lucide="calendar-check-2"></i>
-            <h2>Aún no tienes reservas</h2>
-            <p>Elige una cancha y encuentra el horario que mejor te funcione.</p>
-            <a class="button" href="{% url 'reservations:home' %}">Explorar canchas</a>
+{% if next_booking %}
+    <section class="next-booking glass-panel" aria-labelledby="next-booking-title">
+        <div class="next-booking-icon"><i data-lucide="bell-ring"></i></div>
+        <div>
+            <span class="eyebrow">Tu próxima reserva</span>
+            <h2 id="next-booking-title">{{ next_booking.court.name }}</h2>
+            <p>{{ next_booking.starts_at|date:"l, j \d\e F" }} · {{ next_booking.starts_at|time:"g:i a" }} · Comienza en {{ next_booking.starts_at|timeuntil }}</p>
         </div>
-    {% endfor %}
-</section>
-{% endblock %}
+    </section>
+{% endif %}
 
+{% if upcoming or history %}
+    <section class="booking-section" aria-labelledby="upcoming-title">
+        <h2 id="upcoming-title" class="booking-section-title">Próximas <span>{{ upcoming|length }}</span></h2>
+        <div class="booking-list">
+            {% for booking in upcoming %}
+                {% include "reservations/_booking_card.html" %}
+            {% empty %}
+                <p class="booking-section-empty">No tienes reservas próximas.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if history %}
+        <section class="booking-section" aria-labelledby="history-title">
+            <h2 id="history-title" class="booking-section-title">Historial <span>{{ history|length }}</span></h2>
+            <div class="booking-list">
+                {% for booking in history %}
+                    {% include "reservations/_booking_card.html" %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+{% else %}
+    <div class="empty-state glass-panel">
+        <i data-lucide="calendar-check-2"></i>
+        <h2>Aún no tienes reservas</h2>
+        <p>Elige una cancha y encuentra el horario que mejor te funcione.</p>
+        <a class="button" href="{% url 'reservations:home' %}">Explorar canchas</a>
+    </div>
+{% endif %}
+{% endblock %}
