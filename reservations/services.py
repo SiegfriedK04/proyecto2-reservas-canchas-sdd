@@ -93,3 +93,22 @@ def nearest_alternatives(*, court, starts_at, ends_at, limit=4):
             matching.append(slot)
     return matching[:limit]
 
+
+def next_available_slot(*, days=7):
+    """Primer horario libre entre las canchas activas dentro de los próximos días (RF-13)."""
+    courts = list(Court.objects.filter(is_active=True))
+    today = timezone.localdate()
+    for offset in range(days):
+        day = today + timedelta(days=offset)
+        best = None
+        for court in courts:
+            slots = available_slots(court=court, day=day)
+            if not slots:
+                continue
+            starts_at = datetime.fromisoformat(slots[0]["start"])
+            if best is None or starts_at < best["starts_at"]:
+                best = {"court": court, "day": day, "starts_at": starts_at}
+        if best:
+            return best
+    return None
+

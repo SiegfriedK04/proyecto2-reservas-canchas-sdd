@@ -131,6 +131,9 @@ p { color: var(--muted); line-height: 1.65; }
 .mini-card-main { inset: 52px 18px 42px 34px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(150deg, rgba(255,255,255,.92), rgba(232,241,255,.78)); transform: rotate(-2deg); }
 .mini-card-main span, .mini-card-main small { color: var(--muted); }
 .mini-card-main strong { margin: 14px 0; font-size: 3.4rem; letter-spacing: -.06em; }
+a.mini-card-main { transition: transform .22s ease, box-shadow .22s ease; }
+a.mini-card-main:hover { transform: rotate(-1deg) translateY(-3px); }
+.mini-card-empty strong { font-size: 1.9rem; letter-spacing: -.04em; }
 .mini-card-top { top: 0; right: -10px; display: flex; align-items: center; gap: 8px; color: #167d35; font-weight: 700; }
 .mini-card-bottom { bottom: 0; left: -2px; display: flex; align-items: center; gap: 8px; color: var(--indigo); font-weight: 700; }
 

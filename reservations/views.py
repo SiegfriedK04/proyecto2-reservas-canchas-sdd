@@ -17,6 +17,7 @@ from django.views.decorators.http import require_GET, require_POST
 from .forms import RegistrationForm
 from .models import Booking, Court
 from .services import available_slots, can_cancel_booking, cancel_booking, create_booking, nearest_alternatives
+from .services import next_available_slot
 
 
 class CourtLoginView(LoginView):
@@ -30,7 +31,7 @@ class CourtLogoutView(LogoutView):
 
 def home(request):
     courts = Court.objects.filter(is_active=True)
-    return render(request, "reservations/home.html", {"courts": courts})
+    return render(request, "reservations/home.html", {"courts": courts, "next_slot": next_available_slot()})
 
 
 def register(request):
@@ -49,6 +50,12 @@ def register(request):
 def booking_calendar(request, court_id):
     court = get_object_or_404(Court, pk=court_id, is_active=True)
     initial_day = max(timezone.localdate() + timedelta(days=1), timezone.localdate())
+    try:
+        requested_day = date.fromisoformat(request.GET.get("fecha", ""))
+    except ValueError:
+        requested_day = None
+    if requested_day and requested_day >= timezone.localdate():
+        initial_day = requested_day
     return render(
         request,
         "reservations/calendar.html",
