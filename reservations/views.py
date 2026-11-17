@@ -16,7 +16,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from .forms import RegistrationForm
 from .models import Booking, Court
-from .services import available_slots, can_cancel_booking, cancel_booking, create_booking, nearest_alternatives
+from .services import can_cancel_booking, cancel_booking, create_booking, day_availability, nearest_alternatives
 
 
 class CourtLoginView(LoginView):
@@ -64,11 +64,13 @@ def availability_api(request, court_id):
     except ValueError:
         return JsonResponse({"error": "La fecha debe usar el formato AAAA-MM-DD."}, status=400)
 
+    slots, occupied = day_availability(court=court, day=day)
     return JsonResponse(
         {
             "court": {"id": court.pk, "name": court.name, "slot_minutes": court.slot_minutes},
             "date": day.isoformat(),
-            "slots": available_slots(court=court, day=day),
+            "slots": slots,
+            "occupied_slots": occupied,
         }
     )
 
