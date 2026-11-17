@@ -34,7 +34,7 @@ Cada Pull Request debe incluir los comandos ejecutados y relacionar las pruebas 
 ## Resultado del ciclo de interfaz y reservas
 
 - `python manage.py check`: sin observaciones.
-- `python manage.py test`: 30 pruebas aprobadas.
+- `python manage.py test`: 58 pruebas aprobadas.
 - Revisión visual: inicio, calendario, inicio de sesión y registro verificados en escritorio.
 - Calendario: 42 celdas mensuales, navegación entre meses y horarios obtenidos desde la API.
 - Datos demo: ejecución repetible y permisos del administrador verificados.
@@ -53,4 +53,11 @@ Cada Pull Request debe incluir los comandos ejecutados y relacionar las pruebas 
 19. Preseleccionar la fecha del calendario con `?fecha=` e ignorar fechas pasadas o inválidas (RF-14).
 
 La revisión visual se documenta con capturas a 1366 px y 390 px en cada Pull Request.
+
+## Resultado acumulado final
+
+- `python manage.py check`: sin observaciones.
+- `python manage.py makemigrations --check --dry-run`: sin cambios pendientes.
+- `python manage.py test`: 58 de 58 pruebas aprobadas.
+- GitHub Actions: aprobado tras integrar el ciclo final.
 

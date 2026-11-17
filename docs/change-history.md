@@ -38,5 +38,7 @@
 - **Especificación agregada:** HU-10, HU-11, HU-12, RF-12, RF-13, RF-14, RNF-08 y CA-12 a CA-15.
 - **Plan:** especificación primero; después un Pull Request independiente por Issue (#27, #28, #29 y #30), cada uno con pruebas automatizadas.
 - **Compatibilidad:** la API de disponibilidad conserva el campo `slots` y agrega `occupied_slots`.
-- **Estado:** especificado; implementación en revisión.
+- **Implementación:** PR #32 navegación móvil y teclado; PR #33 horarios ocupados; PR #34 agenda organizada; PR #35 próximo horario real.
+- **Pruebas:** la suite acumulada aumentó de 30 a 58 casos aprobados.
+- **Estado:** implementado, revisado e integrado en `main`.
 

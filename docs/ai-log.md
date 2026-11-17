@@ -8,6 +8,11 @@
 | 2026-11-05 | Experiencia de reserva | Codex | Crear catálogo, registro y calendario visual con selección de horarios | Interfaz adaptable, API de disponibilidad, confirmación y cancelaciones | Conservar la paleta iOS y el calendario mensual como recorrido principal |
 | 2026-11-05 | Revisión visual y calidad | Codex | Verificar formularios, calendario, ejecución local y datos de demostración | Pantallas revisadas, textos corregidos y suite ampliada | Automatizar las verificaciones en cada Pull Request |
 | 2026-11-05 | Cambio de especificación | Codex | Incorporar una ventana mínima de dos horas para cancelaciones | Especificaciones, prueba inicialmente fallida, servicio, interfaz y pruebas finales | Aprobar el cambio con excepción operativa para administradores |
+| 2026-11-11 | Revisión QA del ciclo final | Claude Code | Identificar defectos de navegación, disponibilidad, agenda y portada | HU-10 a HU-12, RF-12 a RF-14, RNF-08 y CA-12 a CA-15 | Dividir la implementación en cuatro PR independientes |
+| 2026-11-11 | Accesibilidad móvil | Claude Code | Mantener acciones de cuenta en móvil y mejorar navegación por teclado | Menú adaptable, enlace de salto, foco visible y pruebas | Integrar al cumplir CA-12 |
+| 2026-11-11 | Disponibilidad completa | Claude Code | Mostrar horarios ocupados sin revelar información privada | API compatible, estados ocupados, consultas optimizadas y pruebas | Conservar `slots` y agregar `occupied_slots` |
+| 2026-11-11 | Agenda y portada | Claude Code | Ordenar reservas y reemplazar el horario fijo por disponibilidad real | Próxima reserva, historial, próximo horario real y pruebas | Integrar como mejoras independientes y trazables |
+| 2026-11-16 | Auditoría de cierre | Codex | Revisar PR, README y cumplimiento del PDF | PR de David integrados, documentación sincronizada y lista de cumplimiento | Mantener 58 pruebas como línea base final |
 
 ## Regla de uso
 

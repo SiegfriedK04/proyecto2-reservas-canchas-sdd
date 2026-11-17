@@ -25,5 +25,8 @@ jobs:
       - name: Validar configuración
         run: python manage.py check
 
+      - name: Verificar migraciones
+        run: python manage.py makemigrations --check --dry-run
+
       - name: Ejecutar pruebas
         run: python manage.py test

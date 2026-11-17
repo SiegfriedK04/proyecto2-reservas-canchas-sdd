@@ -6,6 +6,7 @@
 | Reserva mínima | Carlos Jaén | Gabriel Rodríguez | Compartido temporalmente |
 | Operación y calidad | Carlos Jaén | Gabriel Rodríguez | Revisión cruzada entre Gabriel y Carlos |
 | Mejoras complementarias | Gabriel Rodríguez | Carlos Jaén | David Ortega |
+| Auditoría de cierre | Gabriel Rodríguez | Carlos Jaén | David Ortega |
 
 ## Responsabilidades
 
@@ -27,5 +28,5 @@
 - Mantener integración continua.
 - Verificar instalación, ejecución y evidencia.
 
-La revisión cruzada se mantiene en todos los ciclos. El ciclo de mejoras complementarias reserva tareas abiertas para que David incorpore aportes adicionales sin alterar la línea base aprobada.
+La revisión cruzada se mantuvo en todos los ciclos. David lideró el ciclo final de QA/DevOps mediante la especificación de HU-10 a HU-12 y cuatro Pull Requests con mejoras de accesibilidad, disponibilidad, agenda y portada.
 
