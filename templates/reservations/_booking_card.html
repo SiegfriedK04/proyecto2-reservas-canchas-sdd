@@ -1,0 +1,26 @@
+<article class="booking-card glass-panel {% if booking.status == 'cancelled' or booking.is_finished %}booking-cancelled{% endif %}">
+    <div class="booking-date-block">
+        <span>{{ booking.starts_at|date:"M" }}</span>
+        <strong>{{ booking.starts_at|date:"d" }}</strong>
+    </div>
+    <div class="booking-info">
+        <div class="booking-title-row">
+            <h3>{{ booking.court.name }}</h3>
+            {% if booking.is_finished %}
+                <span class="status-pill status-finished">Finalizada</span>
+            {% else %}
+                <span class="status-pill status-{{ booking.status }}">{{ booking.get_status_display }}</span>
+            {% endif %}
+        </div>
+        <p><i data-lucide="clock-3"></i> {{ booking.starts_at|date:"l, j \d\e F" }} · {{ booking.starts_at|time:"g:i a" }} - {{ booking.ends_at|time:"g:i a" }}</p>
+        <p><i data-lucide="map-pin"></i> {{ booking.court.location }}</p>
+    </div>
+    {% if booking.can_cancel %}
+        <form method="post" action="{% url 'reservations:cancel_booking' booking.id %}" onsubmit="return window.confirm('¿Cancelar la reserva de {{ booking.court.name|escapejs }}? El horario quedará libre para otros clientes.');">
+            {% csrf_token %}
+            <button class="button button-danger button-small" type="submit">Cancelar</button>
+        </form>
+    {% elif booking.status == 'confirmed' and not booking.is_finished %}
+        <span class="cancel-note"><i data-lucide="lock-keyhole"></i> Faltan menos de dos horas</span>
+    {% endif %}
+</article>
