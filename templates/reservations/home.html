@@ -7,18 +7,27 @@
         <h1>Tu cancha, en el horario que necesitas.</h1>
         <p>Consulta disponibilidad real, elige un día en el calendario y confirma tu espacio en pocos pasos.</p>
         <div class="hero-actions">
-            {% if courts %}<a class="button" href="{% url 'reservations:booking_calendar' courts.0.id %}">Ver disponibilidad</a>{% endif %}
+            {% if next_slot %}<a class="button" href="{% url 'reservations:booking_calendar' next_slot.court.id %}?fecha={{ next_slot.day|date:'Y-m-d' }}">Reservar el próximo horario</a>
+            {% elif courts %}<a class="button" href="{% url 'reservations:booking_calendar' courts.0.id %}">Ver disponibilidad</a>{% endif %}
             {% if not user.is_authenticated %}<a class="button button-secondary" href="{% url 'reservations:register' %}">Crear cuenta</a>{% endif %}
         </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-        <div class="mini-card mini-card-main">
-            <span>Próximo horario</span>
-            <strong>6:30 p. m.</strong>
-            <small>Cancha Pacífico</small>
-        </div>
-        <div class="mini-card mini-card-top"><i data-lucide="check"></i> Disponible</div>
-        <div class="mini-card mini-card-bottom"><i data-lucide="clock-3"></i> Confirmación inmediata</div>
+    <div class="hero-visual">
+        {% if next_slot %}
+            <a class="mini-card mini-card-main" href="{% url 'reservations:booking_calendar' next_slot.court.id %}?fecha={{ next_slot.day|date:'Y-m-d' }}">
+                <span>Próximo horario libre</span>
+                <strong>{{ next_slot.starts_at|time:"g:i a" }}</strong>
+                <small>{{ next_slot.court.name }} · {{ next_slot.starts_at|date:"l j \d\e F" }}</small>
+            </a>
+            <div class="mini-card mini-card-top" aria-hidden="true"><i data-lucide="check"></i> Disponible</div>
+        {% else %}
+            <div class="mini-card mini-card-main mini-card-empty">
+                <span>Disponibilidad</span>
+                <strong>Consulta el calendario</strong>
+                <small>No hay horarios libres en los próximos 7 días.</small>
+            </div>
+        {% endif %}
+        <div class="mini-card mini-card-bottom" aria-hidden="true"><i data-lucide="clock-3"></i> Confirmación inmediata</div>
     </div>
 </section>
 
