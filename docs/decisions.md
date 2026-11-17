@@ -20,7 +20,7 @@
 
 ## DEC-004 - Propiedad y colaboración
 
-- **Decisión:** Gabriel será propietario y líder inicial del repositorio; Carlos participará como colaborador y los roles rotarán por ciclo.
+- **Decisión:** Gabriel mantiene la propiedad del repositorio; Carlos y David participan como colaboradores y los roles rotan por ciclo.
 - **Razón:** mantiene continuidad con el Proyecto 1 y permite evidencia individual mediante ramas, commits y revisiones.
-- **Consecuencia:** David se incorporará cuando su acceso y bloque de trabajo estén definidos.
+- **Consecuencia:** Gabriel y Carlos desarrollaron la línea base; David lideró las mejoras complementarias y QA del ciclo final mediante PR independientes.
 

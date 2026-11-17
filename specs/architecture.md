@@ -16,12 +16,14 @@ Se propone una aplicación web monolítica con Django porque el equipo ya conoce
 | Pruebas | Django TestCase |
 | Integración continua | GitHub Actions |
 
-## Componentes previstos
+## Componentes implementados
 
-- `accounts`: registro, autenticación y perfil básico.
-- `venues`: canchas, horarios de operación y bloqueos.
-- `bookings`: disponibilidad, creación, consulta y cancelación.
-- `audit`: eventos relevantes de reservas y administración.
+- `courtflow`: configuración, rutas principales y puntos de entrada WSGI/ASGI.
+- `reservations.models`: canchas, bloqueos, reservas y eventos de auditoría.
+- `reservations.services`: disponibilidad, creación y cancelación transaccional, alternativas y próximo horario libre.
+- `reservations.views`: catálogo, registro, calendario, agenda y API interna.
+- `reservations.tests`: pruebas unitarias, reglas críticas, vistas, accesibilidad y criterios de aceptación.
+- `templates` y `static`: interfaz adaptable, calendario e interacción del cliente.
 
 ## Flujo de creación de una reserva
 
