@@ -29,3 +29,14 @@
 - **Pruebas:** rechazo del cliente, conservación del estado, excepción administrativa y presentación en la agenda.
 - **Estado:** implementado y validado.
 
+## Ciclo de mejoras complementarias
+
+### 2026-11-11 - Revisión QA y mejoras de experiencia
+
+- **Origen:** revisión QA de la línea base en escritorio (1366 px) y móvil (390 px), registrada en #25 y #26.
+- **Hallazgos:** enlaces de cuenta ocultos en móvil, foco poco visible, horarios ocupados omitidos pese a CA-01, aviso de cancelación en reservas finalizadas, agenda sin orden cronológico y horario fijo en la portada.
+- **Especificación agregada:** HU-10, HU-11, HU-12, RF-12, RF-13, RF-14, RNF-08 y CA-12 a CA-15.
+- **Plan:** especificación primero; después un Pull Request independiente por Issue (#27, #28, #29 y #30), cada uno con pruebas automatizadas.
+- **Compatibilidad:** la API de disponibilidad conserva el campo `slots` y agrega `occupied_slots`.
+- **Estado:** especificado; implementación en revisión.
+

@@ -11,6 +11,10 @@
 - **CA-09:** Dado un conflicto, cuando se rechaza la solicitud, entonces el usuario recibe la causa y al menos una alternativa cuando existan horarios cercanos.
 - **CA-10:** Dada una acción de creación, cancelación o bloqueo, cuando concluye, entonces queda registrada para auditoría.
 - **CA-11:** Dada una reserva que inicia en menos de dos horas, cuando el cliente intenta cancelarla, entonces el sistema conserva la reserva y explica el límite; un administrador sí puede cancelarla por operación.
+- **CA-12:** Dado un usuario en una pantalla de 390 px o que navega con teclado, cuando recorre la interfaz, entonces encuentra los enlaces de su cuenta, ve el foco y el menú indica la página actual con `aria-current="page"`.
+- **CA-13:** Dado un cliente con reservas próximas, finalizadas y canceladas, cuando abre su agenda, entonces ve la próxima destacada, las próximas en orden ascendente y las demás en el historial, sin avisos de cancelación en reservas finalizadas.
+- **CA-14:** Dado un horario reservado o bloqueado, cuando se consulta la disponibilidad, entonces aparece como ocupado, no puede seleccionarse y no revela el usuario ni el motivo.
+- **CA-15:** Dadas canchas activas con horarios libres, cuando un visitante abre la portada, entonces ve el primer horario libre real y su enlace abre el calendario en esa fecha.
 
 ## Criterio obligatorio de doble reserva
 

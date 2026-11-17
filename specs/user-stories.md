@@ -114,3 +114,43 @@ Las historias se numeran para mantener trazabilidad entre backlog, requisitos, c
 
 **Trazabilidad:** RF-10, CA-10.
 
+## HU-10 - Navegar desde cualquier dispositivo
+
+**Como** cliente que usa un teléfono o solo el teclado, **quiero** acceder a todas las secciones y distinguir dónde está el foco, **para** gestionar mis reservas sin depender de una computadora o de un mouse.
+
+### Criterios
+
+- En pantallas pequeñas siguen visibles los enlaces de cuenta: "Mis reservas", "Cerrar sesión", "Iniciar sesión" y "Crear cuenta".
+- El foco del teclado es visible en enlaces, botones, campos, días y horarios.
+- Existe un enlace para saltar al contenido principal.
+- El menú indica la página actual de forma accesible.
+
+**Trazabilidad:** RNF-05, RNF-08, CA-12.
+
+## HU-11 - Organizar mi agenda
+
+**Como** cliente, **quiero** ver primero mi próxima reserva y separar las próximas del historial, **para** recordar mis compromisos sin revisar toda la lista.
+
+### Criterios
+
+- Las próximas reservas confirmadas se muestran en orden cronológico ascendente.
+- La próxima reserva se destaca con el tiempo restante.
+- Las reservas canceladas o finalizadas se agrupan en un historial.
+- Una reserva finalizada no muestra el aviso de cancelación con dos horas de anticipación.
+- La cancelación solicita confirmación antes de enviarse.
+
+**Trazabilidad:** RF-06, RF-12, CA-13.
+
+## HU-12 - Descubrir el próximo horario libre
+
+**Como** visitante, **quiero** ver desde la portada el próximo horario realmente disponible, **para** reservar con un solo clic sin explorar cada calendario.
+
+### Criterios
+
+- El horario mostrado proviene de la disponibilidad real de canchas activas.
+- Se consideran reservas, bloqueos y horarios pasados.
+- El enlace abre el calendario de la cancha con la fecha preseleccionada.
+- Si no hay horarios cercanos, se muestra un mensaje neutral en lugar de un dato inventado.
+
+**Trazabilidad:** RF-13, RF-14, CA-15.
+

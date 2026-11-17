@@ -42,3 +42,15 @@ Cada Pull Request debe incluir los comandos ejecutados y relacionar las pruebas 
 - Integración continua: configuración preparada para ejecutar comprobaciones y pruebas en cada Pull Request.
 - Cambio de especificación: cancelación tardía rechazada sin mutación y excepción administrativa verificadas.
 
+## Casos del ciclo de mejoras complementarias
+
+13. Mostrar enlaces de cuenta, enlace de salto y `aria-current` en el menú (CA-12).
+14. Ordenar las próximas reservas, destacar la siguiente y separar el historial (CA-13).
+15. Mostrar "Finalizada" sin aviso de dos horas en una reserva confirmada ya concluida (CA-13).
+16. Informar horarios reservados y bloqueados como ocupados, sin usuario ni motivo (CA-14).
+17. Consultar la disponibilidad de una jornada con un número constante de consultas.
+18. Calcular el próximo horario libre ignorando canchas inactivas, reservas y bloqueos (CA-15).
+19. Preseleccionar la fecha del calendario con `?fecha=` e ignorar fechas pasadas o inválidas (RF-14).
+
+La revisión visual se documenta con capturas a 1366 px y 390 px en cada Pull Request.
+
